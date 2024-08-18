@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Code.Tool.Service.JsonGUIEditor
 {
-    using Code.Tool.Service.JsonEditorExtention;
+    using Code.Tool.Service.JsonEditorExtension;
     using Code.Tool.Service.JsonEditorConstants;
     using Code.Tool.Service.JsonGUIStyles;
     using Code.Tool.Service.JsonGUIButtons;

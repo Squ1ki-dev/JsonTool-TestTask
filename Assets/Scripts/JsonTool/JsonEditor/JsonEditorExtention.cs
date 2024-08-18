@@ -14,12 +14,12 @@ using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Code.Tool.Service.JsonEditorExtention
+namespace Code.Tool.Service.JsonEditorExtension
 {
     using Code.Tool.Service.JsonParser;
 
     [CustomEditor(typeof(TextAsset), true)]
-    public class JsonEditorExtention : Editor
+    public class JsonEditorExtension : Editor
     {
         private Action onSubView;
         public static Event currentEvent;

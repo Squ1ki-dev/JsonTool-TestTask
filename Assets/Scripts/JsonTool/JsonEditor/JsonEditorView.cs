@@ -10,7 +10,7 @@ using System.Collections.Concurrent;
 
 using Newtonsoft.Json.Linq;
 
-namespace Code.Tool.Service.JsonEditorExtention
+namespace Code.Tool.Service.JsonEditorExtension
 {
     using Code.Tool.Service.JsonGUIStyles;
     using Code.Tool.Service.JsonEditorConstants;
@@ -27,7 +27,7 @@ namespace Code.Tool.Service.JsonEditorExtention
         
         public static void BaseView(ref Action onSubView, ref JObject jsonObject, ref string editText, ref bool jsonShow, ref bool jsonTextEdit)
         {
-            var lineCount = File.ReadLines(JsonEditorExtention.Path).Count();
+            var lineCount = File.ReadLines(JsonEditorExtension.Path).Count();
             initialRect = new Rect(JsonEditorConstants.START_RECT_X, JsonEditorConstants.START_RECT_Y, EditorGUIUtility.currentViewWidth - JsonEditorConstants.HUGE_SPACE, lineCount * 5 + 500);
             limitSpace = initialRect.size.y >= JsonEditorConstants.LIMIT_SPACE ? JsonEditorConstants.LIMIT_SPACE : initialRect.size.y;
 
@@ -48,7 +48,7 @@ namespace Code.Tool.Service.JsonEditorExtention
             else
             {
                 ShowView(true, jsonObject);
-                onSubView = () => InspecterEditSubView();
+                onSubView = () => InspectorEditSubView();
             }
             EditorGUILayout.EndScrollView();
 
@@ -83,16 +83,16 @@ namespace Code.Tool.Service.JsonEditorExtention
             GUILayout.Space(limitSpace + JsonEditorConstants.BIG_SPACE);
             EditorGUILayout.BeginHorizontal(GUILayout.MaxWidth(EditorGUIUtility.currentViewWidth));
             if (GUILayout.Button("Edit Inspector", JsonGUIStyles.BtnStyle, GUILayout.Width(initialRect.size.x / 2 - JsonEditorConstants.NORMAL_SPACE), GUILayout.Height(JsonEditorConstants.HUGE_SPACE)))
-                JsonEditorExtention.jsonShow = false;
+                JsonEditorExtension.jsonShow = false;
 
             
             if (GUILayout.Button("Edit Text", JsonGUIStyles.BtnStyle, GUILayout.Width(initialRect.size.x / 2 - JsonEditorConstants.NORMAL_SPACE), GUILayout.Height(JsonEditorConstants.HUGE_SPACE)))
             {
-                if (JsonEditorExtention.jsonObject != null)
-                    JsonEditorExtention.editText = JsonEditorExtention.jsonObject.ToString();
+                if (JsonEditorExtension.jsonObject != null)
+                    JsonEditorExtension.editText = JsonEditorExtension.jsonObject.ToString();
 
-                JsonEditorExtention.jsonShow = false;
-                JsonEditorExtention.jsonTextEdit = true;
+                JsonEditorExtension.jsonShow = false;
+                JsonEditorExtension.jsonTextEdit = true;
             }
             EditorGUILayout.EndHorizontal();
         }
@@ -103,7 +103,7 @@ namespace Code.Tool.Service.JsonEditorExtention
         {
             if (tool || initialRect == Rect.zero)
             {
-                var lineCount = File.ReadLines(JsonEditorExtention.Path).Count();
+                var lineCount = File.ReadLines(JsonEditorExtension.Path).Count();
                 initialRect.size = new Vector2(200, lineCount * 5 + 500);
             }
             SubTextEditControlView();
@@ -116,9 +116,9 @@ namespace Code.Tool.Service.JsonEditorExtention
 
             if (GUILayout.Button("Show Json", JsonGUIStyles.BtnStyle, GUILayout.Width(initialRect.size.x / 2 - JsonEditorConstants.NORMAL_SPACE), GUILayout.Height(JsonEditorConstants.HUGE_SPACE)))
             {
-                JsonEditorExtention.editText = "";
-                JsonEditorExtention.jsonShow = true;
-                JsonEditorExtention.jsonTextEdit = false;
+                JsonEditorExtension.editText = "";
+                JsonEditorExtension.jsonShow = true;
+                JsonEditorExtension.jsonTextEdit = false;
             }
             EditorGUILayout.EndHorizontal();
         }
@@ -127,23 +127,23 @@ namespace Code.Tool.Service.JsonEditorExtention
         {
             if (GUILayout.Button("Save", JsonGUIStyles.BtnStyle, GUILayout.Width(initialRect.size.x), GUILayout.Height(JsonEditorConstants.HUGE_SPACE)))
             {
-                JsonEditorExtention.SaveJson();
-                JsonEditorExtention.ReadJson();
+                JsonEditorExtension.SaveJson();
+                JsonEditorExtension.ReadJson();
             }
         }
 
-        public static void InspecterEditSubView(bool tool = false)
+        public static void InspectorEditSubView(bool tool = false)
         {
             if (tool || initialRect == Rect.zero)
             {
-                var lineCount = File.ReadLines(JsonEditorExtention.Path).Count();
+                var lineCount = File.ReadLines(JsonEditorExtension.Path).Count();
                 initialRect.size = new Vector2(200, lineCount * 5 + 500);
             }
 
             SubInspectorEditControlView();
         }
 
-        private static void InspecterEditSubView()
+        private static void InspectorEditSubView()
         {
             GUILayout.Space(limitSpace + JsonEditorConstants.BIG_SPACE);
             SubInspectorEditControlView();
@@ -164,9 +164,9 @@ namespace Code.Tool.Service.JsonEditorExtention
 
         private static void SaveJsonInspector()
         {
-            JsonEditorExtention.jsonInspectorEdit = true;
-            JsonEditorExtention.SaveJson(true);
-            JsonEditorExtention.ReadJson();
+            JsonEditorExtension.jsonInspectorEdit = true;
+            JsonEditorExtension.SaveJson(true);
+            JsonEditorExtension.ReadJson();
         }
         
         public static void ShowAddPropertyMenu()
@@ -174,7 +174,7 @@ namespace Code.Tool.Service.JsonEditorExtention
             GenericMenu menu = new GenericMenu();
             menu.AddSeparator("");
 
-            JContainer jContainer = JsonEditorExtention.jsonObject.Value<JContainer>();
+            JContainer jContainer = JsonEditorExtension.jsonObject.Value<JContainer>();
 
             AddMenuItem(menu, "String", () => JsonGUIButtons.AddNewProperty<string>(jContainer));
             AddMenuItem(menu, "Float", () => JsonGUIButtons.AddNewProperty<float>(jContainer));
@@ -183,8 +183,8 @@ namespace Code.Tool.Service.JsonEditorExtention
             AddMenuItem(menu, "Object", () => JsonGUIButtons.AddNewProperty<JObject>(jContainer, JTokenType.Object));
             AddMenuItem(menu, "Array", () => JsonGUIButtons.AddNewProperty<JArray>(jContainer, JTokenType.Array));
 
-            JsonEditorExtention.currentEvent = Event.current;
-            menu.DropDown(new Rect(JsonEditorExtention.currentEvent.mousePosition.x, JsonEditorExtention.currentEvent.mousePosition.y, 10, 10));
+            JsonEditorExtension.currentEvent = Event.current;
+            menu.DropDown(new Rect(JsonEditorExtension.currentEvent.mousePosition.x, JsonEditorExtension.currentEvent.mousePosition.y, 10, 10));
         }
 
         private static void AddMenuItem(GenericMenu menu, string content, GenericMenu.MenuFunction action) => menu.AddItem(new GUIContent(content), false, action);
@@ -195,8 +195,8 @@ namespace Code.Tool.Service.JsonEditorExtention
             EditorGUILayout.BeginHorizontal(GUILayout.MaxWidth(EditorGUIUtility.currentViewWidth));
             if (GUILayout.Button("Show Json", JsonGUIStyles.BtnStyle, GUILayout.Width(initialRect.size.x - JsonEditorConstants.NORMAL_SPACE), GUILayout.Height(JsonEditorConstants.HUGE_SPACE)))
             {
-                JsonEditorExtention.jsonShow = true;
-                JsonEditorExtention.ReadJson();
+                JsonEditorExtension.jsonShow = true;
+                JsonEditorExtension.ReadJson();
             }
 
             EditorGUILayout.EndHorizontal();

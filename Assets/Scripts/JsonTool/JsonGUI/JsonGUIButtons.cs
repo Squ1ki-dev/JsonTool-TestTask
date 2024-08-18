@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 namespace Code.Tool.Service.JsonGUIButtons
 {
     using Code.Tool.Service.JsonUtilities;
-    using Code.Tool.Service.JsonEditorExtention;
+    using Code.Tool.Service.JsonEditorExtension;
 
     public static class JsonGUIButtons
     {
