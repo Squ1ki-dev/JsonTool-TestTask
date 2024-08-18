@@ -1,0 +1,8 @@
+{
+  "id": 2003,
+  "type": "Spaceship",
+  "name": "Kobayashi Maru",
+  "icon": "pwr003.png",
+  "stat": "power",
+  "amount": 20
+}

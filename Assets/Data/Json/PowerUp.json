@@ -1,0 +1,8 @@
+{
+  "id": 2001,
+  "type": "Powerup",
+  "name": "Warp Booster",
+  "icon": "pwr001.png",
+  "stat": "speed",
+  "amount": 50
+}

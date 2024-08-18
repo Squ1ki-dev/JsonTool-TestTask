@@ -1,0 +1,27 @@
+{
+  "id": 4004,
+  "type": "Bundle",
+  "name": "May the 4th Be With You Offer",
+  "asset": "bundle004.png",
+  "price": "$9.99",
+  "items": [
+    {
+      "": {
+        "itemId": 3002,
+        "amount": 1000
+      }
+    },
+    {
+      "": {
+        "itemId": 2002,
+        "amount": 10
+      }
+    },
+    {
+      "": {
+        "itemId": 1002,
+        "amount": 1
+      }
+    }
+  ]
+}

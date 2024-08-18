@@ -1,0 +1,10 @@
+{
+  "id": 1001,
+  "type": "Spaceship",
+  "name": "Newbie Ship",
+  "icon": "ship001.png",
+  "stats": {
+    "speed": 100,
+    "power": 10
+  }
+}

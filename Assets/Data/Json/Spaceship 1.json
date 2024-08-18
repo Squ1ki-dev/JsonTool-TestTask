@@ -1,0 +1,10 @@
+{
+  "id": 1002,
+  "type": "Spaceship",
+  "name": "USS Ultimate",
+  "icon": "ship002.png",
+  "stats": {
+    "speed": 200,
+    "power": 25
+  }
+}

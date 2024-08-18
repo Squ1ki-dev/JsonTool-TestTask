@@ -1,0 +1,8 @@
+{
+  "id": 2002,
+  "type": "Powerup",
+  "name": "Laser Amplifier",
+  "icon": "pwr002.png",
+  "stat": "power",
+  "amount": 10
+}
